@@ -1,0 +1,56 @@
+﻿<Window x:Class="Projekt2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt2"
+        mc:Ignorable="d"
+        Title="Procesy Bartosz Rychcik 165659" Height="467" Width="953.333">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" CanExecute="Open_CanExecute" />
+    </Window.CommandBindings>
+
+    <Grid Margin="0,0,2,0" RenderTransformOrigin="0.509,0.501">
+        <ListView Name="processes" Margin="0,35,540,0" SelectionChanged="Processes_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="70" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Nazwa" Width="245" DisplayMemberBinding="{Binding ProcessName}" />
+                    <GridViewColumn Header="Priorytet" Width="52" DisplayMemberBinding="{Binding BasePriority}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="newprocess" Content="Rozpocznij proces" HorizontalAlignment="Left" Margin="484,394,0,0" VerticalAlignment="Top" Width="120" Command="ApplicationCommands.New"/>
+        <TextBox x:Name="filename" HorizontalAlignment="Left" Height="23" Margin="484,361,0,0" TextWrapping="Wrap" Text="Podaj ścieżkę do pliku" VerticalAlignment="Top" Width="391"/>
+        <Label x:Name="warning" Content="" HorizontalAlignment="Left" Margin="403,320,0,0" VerticalAlignment="Top" Width="530"/>
+        <Button x:Name="refresh" Content="Odśwież" HorizontalAlignment="Left" Margin="45,8,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="Refresh_Click"/>
+        <ComboBox x:Name="sorting" HorizontalAlignment="Left" Margin="226,8,0,0" VerticalAlignment="Top" Width="161" Loaded="Combobox_Loaded" SelectionChanged="Sorting_SelectionChanged">
+            <ComboBoxItem Content="Nazwie (rosnąco)"/>
+            <ComboBoxItem Content="Nazwie (malejąco)"/>
+            <ComboBoxItem Content="ID (rosnąco)"/>
+            <ComboBoxItem Content="ID (malejąco)"/>
+            <ComboBoxItem Content="Priorytecie (rosnąco)"/>
+            <ComboBoxItem Content="Priorytecie (malejąco)"/>
+        </ComboBox>
+        <Label Content="Sortuj po" HorizontalAlignment="Left" Margin="162,5,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Czas startu procesu: " HorizontalAlignment="Left" Margin="423,195,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="StartProcess" HorizontalAlignment="Left" Height="23" Margin="542,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Zabij wybrany proces" HorizontalAlignment="Left" Margin="484,280,0,0" VerticalAlignment="Top" Width="120" Click="KillProcess_Click"/>
+        <Label Content="Priorytet: " HorizontalAlignment="Left" Margin="423,221,0,0" VerticalAlignment="Top"/>
+        <local:UserControl1 x:Name="memory" Title="Różne rodzaje pamięci (B)" Margin="679,165,10,106"></local:UserControl1>
+        <local:UserControl1 x:Name="threads" Title="Wątki(id, czas startu, priorytet)" Margin="679,0,10,271"></local:UserControl1>
+        <local:UserControl1 x:Name="modules" Title="        Moduły(nazwa)" Margin="420,0,269,271"></local:UserControl1>
+        <ComboBox x:Name="priority" HorizontalAlignment="Left" Margin="496,226,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Priority_SelectionChanged">
+            <ComboBoxItem Content="Idle"/>
+            <ComboBoxItem Content="Normal"/>
+            <ComboBoxItem Content="High"/>
+            <ComboBoxItem Content="AboveNormal"/>
+            <ComboBoxItem Content="BelowNormal"/>
+            <ComboBoxItem Content="RealTime"/>
+        </ComboBox>
+        <Label Content="Timeout (sec): " HorizontalAlignment="Left" Margin="668,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="timeout" HorizontalAlignment="Left" Height="23" Margin="755,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
